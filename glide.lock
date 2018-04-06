@@ -114,7 +114,7 @@ imports:
   - jlexer
   - jwriter
 - name: github.com/mattermost/gorp
-  version: 995ddf2264c4ad45fbaf342f7500e4787ebae84a
+  version: 520a119fe3536337cf8feeaf76afae0f5ae193f1
 - name: github.com/mattermost/html2text
   version: d47a5532a7bc36ad7b2b8ec3eebe24e975154f94
 - name: github.com/mattermost/rsc
@@ -283,4 +283,6 @@ imports:
   - store/memstore
 - name: gopkg.in/yaml.v2
   version: d670f9405373e636a5a2765eea47fac0c9bc91a4
-testImports: []
+testImports:
+- name: github.com/mattn/go-sqlite3
+  version: d896508f87298565da02ed92730e7065c3de10b8
