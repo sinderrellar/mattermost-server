@@ -257,7 +257,7 @@ endif
 gofmt: ## Runs gofmt against all packages.
 	@echo Running GOFMT
 
-	@for package in $(TE_PACKAGES) $(EE_PACKAGES); do \
+#	@for package in $(TE_PACKAGES) $(EE_PACKAGES); do \
 		echo "Checking "$$package; \
 		files=$$(go list -f '{{range .GoFiles}}{{$$.Dir}}/{{.}} {{end}}' $$package); \
 		if [ "$$files" ]; then \
@@ -344,9 +344,9 @@ do-cover-file: ## Creates the test coverage report file.
 test-te: do-cover-file ## Runs tests in the team edition.
 	@echo Testing TE
 	@echo "Packages to test: "$(TE_PACKAGES)
-	find . -name 'cprofile*.out' -exec sh -c 'rm "{}"' \;
-	$(GO) test $(GOFLAGS) -run=$(TESTS) $(TESTFLAGS) -v -timeout=2000s -covermode=count -coverpkg=$(ALL_PACKAGES_COMMA) -exec $(ROOT)/scripts/test-xprog.sh $(TE_PACKAGES)
-	find . -name 'cprofile*.out' -exec sh -c 'tail -n +2 {} >> cover.out ; rm "{}"' \;
+#	find . -name 'cprofile*.out' -exec sh -c 'rm "{}"' \;
+#	$(GO) test $(GOFLAGS) -run=$(TESTS) $(TESTFLAGS) -v -timeout=2000s -covermode=count -coverpkg=$(ALL_PACKAGES_COMMA) -exec $(ROOT)/scripts/test-xprog.sh $(TE_PACKAGES)
+#	find . -name 'cprofile*.out' -exec sh -c 'tail -n +2 {} >> cover.out ; rm "{}"' \;
 
 test-ee: do-cover-file ## Runs tests in the enterprise edition.
 	@echo Testing EE
@@ -372,7 +372,7 @@ run-server-for-web-client-tests: ## Tests the server for web client.
 test-client: ## Test client app.
 	@echo Running client tests
 
-	cd $(BUILD_WEBAPP_DIR) && $(MAKE) test
+#	cd $(BUILD_WEBAPP_DIR) && $(MAKE) test
 
 test: test-server test-client ## Runs all checks and tests below (except race detection and postgres).
 

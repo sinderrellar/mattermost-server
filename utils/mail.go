@@ -45,12 +45,12 @@ type authChooser struct {
 func (a *authChooser) Start(server *smtp.ServerInfo) (string, []byte, error) {
 	smtpAddress := a.connectionInfo.SmtpServerName + ":" + a.connectionInfo.SmtpPort
 	a.Auth = LoginAuth(a.connectionInfo.SmtpUsername, a.connectionInfo.SmtpPassword, smtpAddress)
-//	for _, method := range server.Auth {
-//		if method == "PLAIN" {
-//			a.Auth = smtp.PlainAuth("", a.connectionInfo.SmtpUsername, a.connectionInfo.SmtpPassword, a.connectionInfo.SmtpServerName+":"+a.connectionInfo.SmtpPort)
-//			break
-//		}
-//	}
+	for _, method := range server.Auth {
+		if method == "PLAIN" {
+			a.Auth = smtp.PlainAuth("", a.connectionInfo.SmtpUsername, a.connectionInfo.SmtpPassword, a.connectionInfo.SmtpServerName+":"+a.connectionInfo.SmtpPort)
+			break
+		}
+	}
 	return a.Auth.Start(server)
 }
 
@@ -63,9 +63,9 @@ func LoginAuth(username, password, host string) smtp.Auth {
 }
 
 func (a *loginAuth) Start(server *smtp.ServerInfo) (string, []byte, error) {
-	if !server.TLS {
-		return "", nil, errors.New("unencrypted connection")
-	}
+//	if !server.TLS {
+//		return "", nil, errors.New("unencrypted connection")
+//	}
 
 	if server.Name != a.host {
 		return "", nil, errors.New("wrong host name")
